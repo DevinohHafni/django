@@ -72,6 +72,98 @@ class HttpRequest:
     """A basic HTTP request."""
 
 
+    def get_host(self) -> str:
+        """Return the HTTP host using the environment or request headers."""
+        ...
+
+    def get_port(self) -> str:
+        """Return the port number for the request as a string."""
+        ...
+
+    def get_full_path(self, force_append_slash: bool = False) -> str:
+        """Return the full path including query string."""
+        ...
+
+    def get_full_path_info(self, force_append_slash: bool = False) -> str:
+        """Return the full path_info including query string."""
+        ...
+
+    def _get_full_path(self, path: str, force_append_slash: bool) -> str:
+        ...
+
+    def get_signed_cookie(
+        self,
+        key: str,
+        default: Union[Any, object] = RAISE_ERROR,
+        salt: str = "",
+        max_age: Optional[int] = None,
+    ) -> Any:
+        ...
+
+    def build_absolute_uri(self, location: Optional[str] = None) -> str:
+        ...
+
+    @property
+    def _current_scheme_host(self) -> str:
+        ...
+
+    def _get_scheme(self) -> str:
+        """Return 'http' by default; can be overridden."""
+        ...
+
+    @property
+    def scheme(self) -> str:
+        ...
+
+    def is_secure(self) -> bool:
+        ...
+
+    @property
+    def encoding(self) -> Optional[str]:
+        ...
+
+    @encoding.setter
+    def encoding(self, val: Optional[str]) -> None:
+        ...
+
+    def _initialize_handlers(self) -> None:
+        ...
+
+    @property
+    def upload_handlers(self) -> List[Any]:
+        ...
+
+    @upload_handlers.setter
+    def upload_handlers(self, upload_handlers: List[Any]) -> None:
+        ...
+
+    @property
+    def multipart_parser_class(self) -> Any:
+        ...
+
+    @multipart_parser_class.setter
+    def multipart_parser_class(self, multipart_parser_class: Any) -> None:
+        ...
+
+    def parse_file_upload(self, META: Dict[str, Any], post_data: Any) -> Tuple["QueryDict", MultiValueDict]:
+        ...
+
+    @property
+    def body(self) -> bytes:
+        ...
+
+    def read(self, *args: Any, **kwargs: Any) -> bytes:
+        ...
+
+    def readline(self, *args: Any, **kwargs: Any) -> bytes:
+        ...
+
+    def __iter__(self) -> Any:
+        ...
+
+    def readlines(self) -> List[bytes]:
+        ...
+
     def __init__(self):
         # WARNING: The `WSGIRequest` subclass doesn't call `super`.
         # Any variable assignment made here should also happen in
