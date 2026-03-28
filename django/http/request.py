@@ -53,12 +53,24 @@ class RawPostDataException(Exception):
 
 
 class HttpRequest:
+    _encoding: Optional[str] = None
+    _upload_handlers: List[Any] = []
+    _multipart_parser_class: Any = MultiPartParser
+
+    GET: "QueryDict"
+    POST: "QueryDict"
+    COOKIES: Dict[str, str]
+    META: Dict[str, Any]
+    FILES: MultiValueDict
+    path: str
+    path_info: str
+    method: Optional[str]
+    resolver_match: Optional[Any]
+    content_type: Optional[str]
+    content_params: Optional[Dict[str, Any]]
+
     """A basic HTTP request."""
 
-    # The encoding used in GET/POST dicts. None means use default setting.
-    _encoding = None
-    _upload_handlers = []
-    _multipart_parser_class = MultiPartParser
 
     def __init__(self):
         # WARNING: The `WSGIRequest` subclass doesn't call `super`.
